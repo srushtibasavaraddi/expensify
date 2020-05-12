@@ -1,0 +1,17 @@
+body {
+    font: Helvetica;
+    color:red;
+    background:white;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled{
+    cursor: default;
+}
+
+.is-active{
+    font-weight: bold;
+}
