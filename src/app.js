@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import './styles/styles.scss';
 import 'normalize.css/normalize.css';
 import AppRouter from './routes/AppRouter';
-import {addExpense} from './actions/expenses';
-import {editText} from './actions/filter';
+import {startSetExpenses} from './actions/expenses';
 import configureStore from './store/configureStore';
 import getVisibleExpense from './selectors/expenses';
 import {Provider} from 'react-redux';
@@ -20,4 +19,10 @@ const jsx=(
     </Provider>
 );
 
-ReactDOM.render(jsx,appRoot); 
+ReactDOM.render(<p>Loading..!!</p>,appRoot);
+
+store.dispatch(startSetExpenses()).then(()=>{
+    ReactDOM.render(jsx,appRoot); 
+}).catch((e)=>{
+    console.log("error loading!");
+})

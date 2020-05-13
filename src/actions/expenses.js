@@ -33,6 +33,16 @@ export const removeExpense= ({id}={})=>(
     }
 );
 
+export const startRemoveExpense = (id)=>{
+    return (dispatch)=>{
+        database.ref(`expenses/${id}`).remove().then(()=>{
+        }).catch((e)=>{
+            console.log("Error!!",e);
+        })
+
+        dispatch(removeExpense({id}));
+    }
+}
 export const editExpense=(id,updates={})=>(
     {
         type:'EDIT_EXP',
@@ -40,3 +50,23 @@ export const editExpense=(id,updates={})=>(
         updates
     }
 );
+
+export const setExpenses = (expense)=>({
+    type:"SET_EXPENSES",
+    expense
+})
+
+export const startSetExpenses=()=>{
+    return (dispatch)=>{
+        return database.ref('expenses').once('value').then((snapshot)=>{
+                const expenses=[];
+                snapshot.forEach((item)=>{
+                expenses.push({
+                    id:item.key,
+                    ...item.val()
+                });
+            });
+            dispatch(setExpenses(expenses));  
+        });
+    }
+};
