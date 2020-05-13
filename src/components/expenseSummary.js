@@ -8,7 +8,7 @@ import selector from '../selectors/expenses';
 
 const ExpenseSummary = (props) => (
     <div>
-        Viewing {props.expenses.length} expenses with total of {numeral(props.totalAmount/100).format('$0,0.00')}
+        <h3>Viewing {props.expenseLength} expenses with total of {numeral(props.totalAmount/100).format('$0,0.00')}</h3>
     </div>
 );
 
@@ -16,7 +16,7 @@ const ExpenseSummary = (props) => (
 const mapToState=(state)=>{
     return {    
         totalAmount:sum(state.expense),
-        expenses:selector(state.expense,state.filter)
+        expenseLength:selector(state.expense,state.filter).length
     }
 }
 
