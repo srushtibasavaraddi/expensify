@@ -8,6 +8,7 @@ import {login,logout} from './actions/auth';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import {firebase} from './firebase/firebase';
+import Loader from './components/loader';
 //parent can change prop passed causing the child to get rendered  
 
 const store=configureStore();
@@ -28,7 +29,7 @@ const renderApp = ()=>{
         hasRendered=true;
     }
 }
-ReactDOM.render(<p>Loading!</p>,appRoot);
+ReactDOM.render(<Loader/>,appRoot);
 firebase.auth().onAuthStateChanged((user)=>{
     if(user){
         store.dispatch(login(user.uid));

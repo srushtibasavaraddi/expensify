@@ -1,16 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {startRemoveExpense} from '../actions/expenses';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import numeral from 'numeral';
 
 const ExportListComponent=({description,amount,createdAt,dispatch,id})=>(
-    <div>
-        <Link to={`/edit/${id}`}>{description}</Link>
-        <p>{moment(createdAt).format('Do MMMM,YYYY')}-{numeral(amount/100).format('$0,0.00')}</p>
-        <button onClick={()=>{dispatch(startRemoveExpense(id))}}>remove expense</button>
-    </div>
+        <Link className="list-item" to={`/edit/${id}`}>
+            <div >
+            <h3 className="list-item__title">{description}</h3>
+            <div className="list-item__subtitle">
+                    {moment(createdAt).format('Do MMMM,YYYY')}
+            </div>
+            </div>
+            <h3 className="list-item__data">
+                {numeral(amount/100).format('$0,0.00')}
+            </h3>
+        </Link>
 );
 
 export default connect()(ExportListComponent);

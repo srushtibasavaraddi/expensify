@@ -7,10 +7,18 @@ import ExpenseSummary from './expenseSummary';
 
 const ExpenseList =(props)=>(
     <div>
-        <h2>Expense list</h2>
         <ExpenseSummary/>
         <ExpenseFilter/>
+        <div className="content-container">
+        <div className="list-header">
+        <div className="show-for-mobile">Expenses</div>
+        <div className="show-for-desktop">Expense</div>
+        <div className="show-for-desktop">Amount</div>
+        </div>
+        <div className="list-body">
         {props.expenses.map((expense)=><ExportListComponent key={expense.id} {...expense}/>)}
+        </div>
+        </div>
     </div>
 );
 

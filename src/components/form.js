@@ -66,9 +66,9 @@ export default class Form extends React.Component{
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                <input type="text" placeholder="description"
+                <form  className="form" onSubmit={this.onSubmit}>
+                <p className="form__error" >{this.state.error}</p>
+                <input className="input__text" type="text" placeholder="description"
                 onChange={this.onDescriptionChange}/>
                 <SingleDatePicker 
                     date={this.state.createdAt}
@@ -78,14 +78,15 @@ export default class Form extends React.Component{
                     numberOfMonths={1}
                     isOutsideRange={()=>false}
                 />
-                <input value={this.state.amount} placeholder="amount" onChange={this.onAmountChange}/>
-                <textarea placeholder="Add notte about expense here(optional)"
+                <input className="input__text" value={this.state.amount} placeholder="amount" onChange={this.onAmountChange}/>
+                <textarea className="textarea" placeholder="Add note about expense here (optional)"
                     onChange={this.onNoteChange}
                 />
-                <button>Add Expense</button>
-                <p>{this.state.error}</p>
+                <div>
+                    <button className="button">Add Expense</button>
+                </div>
+                
                 </form>
-            </div>
         )
     }
 }
