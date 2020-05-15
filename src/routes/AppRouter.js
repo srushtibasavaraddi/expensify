@@ -1,23 +1,27 @@
 import React from "react";
-import {BrowserRouter,Route,Switch,Link,NavLink} from 'react-router-dom';  
+import {Router,Route,Switch,Link,NavLink} from 'react-router-dom';  
 import EditExpense from '../components/editExpense';
 import ExpenseDash from '../components/expense';
 import AddExpense from '../components/create';
-import Header from '../components/header';
 import FourO from '../components/notFound';
+import Login from '../components/login';
+import createHistory from 'history/createBrowserHistory';
+import PrivateRoute from './privateRoute';
+import PublicRoute from './publicRoute';
 
+export const history =createHistory();
 const AppRouter=()=>(
-    <BrowserRouter>
+    <Router history={history}>
         <div>
-            <Header/>
             <Switch>
-                <Route path="/" component={ExpenseDash} exact={true}/>
-                <Route path="/edit/:id" component={EditExpense}/> 
-                <Route path="/create" component={AddExpense}/> 
+                <Route path="/" component={Login} exact={true}/>
+                <PrivateRoute path="/dashboard" component={ExpenseDash}/>
+                <PrivateRoute path="/edit/:id" component={EditExpense}/> 
+                <PrivateRoute path="/create" component={AddExpense}/> 
                 <Route component={FourO}/>        
             </Switch>
         </div> 
-    </BrowserRouter>
+    </Router>
 );
 
 export default AppRouter;
